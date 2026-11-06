@@ -6,7 +6,7 @@ Serviço pequeno em Dart/shelf, sem Flutter. Armazena blobs opacos por entidade,
 com revisão por item, idempotência por `changeId` e cursor global de mudanças.
 
 O fluxo de conexão/pareamento/sync do app fica no
-[repositório privado do Stick2Planner](https://github.com/MikeMequis1/Stick2Planner).
+[repositório do Stick2Planner](https://github.com/MikeMequis1/Stick2Planner).
 
 ## Início rápido com a imagem latest
 

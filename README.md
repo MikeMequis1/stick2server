@@ -5,7 +5,7 @@
 Small Dart/shelf service, without Flutter. Stores opaque blobs per entity,
 with per-item revision, idempotency by `changeId`, and a global change cursor.
 
-The app connection/pairing/sync flow lives in the private
+The app connection/pairing/sync flow lives in the
 [Stick2Planner app repository](https://github.com/MikeMequis1/Stick2Planner).
 
 ## Quick start with the latest image

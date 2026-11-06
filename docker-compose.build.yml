@@ -1,0 +1,4 @@
+services:
+  api:
+    build: .
+    image: stick2server:local

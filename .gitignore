@@ -1,0 +1,4 @@
+.dart_tool/
+data/
+.env
+build/

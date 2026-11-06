@@ -120,8 +120,9 @@ Uma instalação antiga pode usar o volume `stick2planner_planner-data`. Para
 preservar o SQLite:
 
 ```bash
-# pare a stack antiga primeiro
+# no diretório da instalação antiga, pare a stack
 docker compose down
+# ou: docker stop stick2planner-api
 
 docker volume create stick2server-data
 docker run --rm \

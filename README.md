@@ -122,8 +122,9 @@ An older local stack may use the volume `stick2planner_planner-data`. To keep
 its SQLite data:
 
 ```bash
-# stop the old stack first
+# in the old deployment directory, stop the old stack
 docker compose down
+# or: docker stop stick2planner-api
 
 docker volume create stick2server-data
 docker run --rm \

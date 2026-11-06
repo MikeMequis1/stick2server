@@ -22,3 +22,4 @@ services:
 
 volumes:
   stick2server-data:
+    name: stick2server-data

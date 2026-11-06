@@ -112,8 +112,26 @@ docker compose -f docker-compose.yml -f docker-compose.build.yml up -d --build
 The named volume `stick2server-data` holds the SQLite database. Backup:
 
 ```bash
-docker run --rm -v stick2server_stick2server-data:/data -v "$PWD/backups:/backup" \
+docker run --rm -v stick2server-data:/data -v "$PWD/backups:/backup" \
   debian:bookworm-slim sh -c 'apt-get update -qq && apt-get install -y -qq sqlite3 >/dev/null && sqlite3 /data/planner-server.sqlite ".backup /backup/planner-$(date +%F).sqlite"'
+```
+
+## Migrating an existing deployment
+
+An older local stack may use the volume `stick2planner_planner-data`. To keep
+its SQLite data:
+
+```bash
+# stop the old stack first
+docker compose down
+
+docker volume create stick2server-data
+docker run --rm \
+  -v stick2planner_planner-data:/from \
+  -v stick2server-data:/to \
+  alpine sh -c 'cp -a /from/. /to/'
+
+docker compose up -d
 ```
 
 ## Pairing

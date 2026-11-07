@@ -265,25 +265,22 @@ void main() {
   test('stats, snapshot e replace refletem os dados ativos', () async {
     final token = await pairDevice();
 
-    Map<String, Object?> postIt(
-      String id,
-      String type, {
-      String? deletedAt,
-    }) => {
-      'changeId': 'ch-$id',
-      'entity': 'postIt',
-      'entityId': id,
-      'baseRev': 0,
-      'updatedAt': 1000,
-      'deleted': deletedAt != null,
-      'payload': jsonEncode({
-        'id': id,
-        'title': id,
-        'type': type,
-        'status': 'active',
-        'deletedAt': deletedAt,
-      }),
-    };
+    Map<String, Object?> postIt(String id, String type, {String? deletedAt}) =>
+        {
+          'changeId': 'ch-$id',
+          'entity': 'postIt',
+          'entityId': id,
+          'baseRev': 0,
+          'updatedAt': 1000,
+          'deleted': deletedAt != null,
+          'payload': jsonEncode({
+            'id': id,
+            'title': id,
+            'type': type,
+            'status': 'active',
+            'deletedAt': deletedAt,
+          }),
+        };
 
     await call(
       'POST',
@@ -361,11 +358,7 @@ void main() {
     final replaceJson = jsonDecode(replaced.text) as Map<String, Object?>;
     expect(replaceJson['entities'], hasLength(1));
 
-    final after = await call(
-      'GET',
-      '/v1/sync/stats',
-      token: token,
-    );
+    final after = await call('GET', '/v1/sync/stats', token: token);
     expect(after.body['postIts'], 1);
     expect(after.body['notes'], 0);
     expect(after.body['events'], 0);
@@ -384,6 +377,40 @@ void main() {
   test('stats exige token de dispositivo', () async {
     final response = await call('GET', '/v1/sync/stats');
     expect(response.status, 401);
+  });
+
+  test('aceita entidade tag no sync', () async {
+    final token = await pairDevice();
+    final response = await raw(
+      'POST',
+      '/v1/sync',
+      token: token,
+      body: {
+        'deviceId': 'device-1',
+        'since': 0,
+        'changes': [
+          {
+            'changeId': 'tag-c1',
+            'entity': 'tag',
+            'entityId': 'tag-1',
+            'baseRev': 0,
+            'updatedAt': 1000,
+            'deleted': false,
+            'payload': jsonEncode({
+              'id': 'tag-1',
+              'name': 'Trabalho',
+              'tone': 'primary',
+              'createdAt': '2026-11-06T12:00:00.000Z',
+              'updatedAt': '2026-11-06T12:00:00.000Z',
+              'deletedAt': null,
+            }),
+          },
+        ],
+      },
+    );
+    expect(response.status, 200);
+    final body = jsonDecode(response.text) as Map<String, Object?>;
+    expect((body['acks'] as List).single, containsPair('entityId', 'tag-1'));
   });
 
   test('revogar dispositivo invalida o token', () async {

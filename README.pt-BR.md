@@ -8,6 +8,17 @@ com revisão por item, idempotência por `changeId` e cursor global de mudanças
 O fluxo de conexão/pareamento/sync do app fica no
 [repositório do Stick2Planner](https://github.com/MikeMequis1/Stick2Planner).
 
+## Compatibilidade
+
+- O servidor **0.2.0** tem como alvo o Stick2Planner **0.3.0** e continua
+  aceitando clientes anteriores.
+- As entidades de sync são `postIt`, `note`, `history` e `tag`. Os payloads são
+  armazenados de forma opaca; cores de tag, paletas e regras de conclusão são
+  interpretadas pelo app, então campos novos do app não exigem atualizar o
+  servidor.
+- Payloads de post-it podem carregar `timeMinutes` e `tagIds`; definições de tag
+  viajam pela entidade `tag`.
+
 ## Início rápido com a imagem latest
 
 ```bash

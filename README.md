@@ -8,6 +8,16 @@ with per-item revision, idempotency by `changeId`, and a global change cursor.
 The app connection/pairing/sync flow lives in the
 [Stick2Planner app repository](https://github.com/MikeMequis1/Stick2Planner).
 
+## Compatibility
+
+- Server **0.2.0** targets Stick2Planner **0.3.0** and keeps accepting older
+  clients.
+- Sync entities are `postIt`, `note`, `history` and `tag`. Their payloads are
+  stored opaquely; tag colors, palettes and completion rules are interpreted by
+  the app, so adding app-only fields does not require a server update.
+- Post-it payloads may carry `timeMinutes` and `tagIds`; tag definitions travel
+  as the `tag` entity.
+
 ## Quick start with the latest image
 
 ```bash

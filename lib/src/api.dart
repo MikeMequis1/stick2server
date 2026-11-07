@@ -6,7 +6,7 @@ import 'package:shelf_router/shelf_router.dart';
 import 'db.dart';
 import 'web.dart';
 
-const serverVersion = '0.1.0';
+const serverVersion = '0.2.0';
 const syncEntities = {'postIt', 'note', 'history', 'tag'};
 const _maxPullLimit = 500;
 const _defaultPullLimit = 200;

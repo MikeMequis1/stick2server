@@ -313,9 +313,10 @@ final class PlannerDb {
     var events = 0;
     var tasks = 0;
     var history = 0;
+    var tags = 0;
     final rows = _db.select(
       "SELECT entity, payload FROM entities WHERE deleted = 0 "
-      "AND entity IN ('postIt', 'note', 'history')",
+      "AND entity IN ('postIt', 'note', 'history', 'tag')",
     );
     for (final row in rows) {
       switch (row['entity']) {
@@ -324,6 +325,9 @@ final class PlannerDb {
           break;
         case 'history':
           history++;
+          break;
+        case 'tag':
+          tags++;
           break;
         case 'postIt':
           postIts++;
@@ -342,6 +346,7 @@ final class PlannerDb {
       'events': events,
       'tasks': tasks,
       'history': history,
+      'tags': tags,
       'deviceLabel': _deviceLabel(deviceId),
     };
   }

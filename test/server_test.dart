@@ -319,6 +319,21 @@ void main() {
               'tone': 'primary',
             }),
           },
+          {
+            'changeId': 'ch-r1',
+            'entity': 'routine',
+            'entityId': 'r1',
+            'baseRev': 0,
+            'updatedAt': 1000,
+            'deleted': false,
+            'payload': jsonEncode({
+              'id': 'r1',
+              'name': 'Manhã',
+              'createdAt': '2026-11-06T12:00:00.000Z',
+              'updatedAt': '2026-11-06T12:00:00.000Z',
+              'items': [],
+            }),
+          },
         ],
       },
     );
@@ -335,6 +350,7 @@ void main() {
     expect(counts['tasks'], 1);
     expect(counts['notes'], 1);
     expect(counts['tags'], 1);
+    expect(counts['routines'], 1);
     expect(counts['deviceLabel'], 'Tablet');
 
     final snapshot = await raw(
@@ -344,7 +360,7 @@ void main() {
     );
     expect(snapshot.status, 200);
     final snapshotJson = jsonDecode(snapshot.text) as Map<String, Object?>;
-    expect(snapshotJson['entities'], hasLength(4));
+    expect(snapshotJson['entities'], hasLength(5));
     expect(snapshotJson['cursor'], isA<int>());
 
     final replaced = await raw(
@@ -378,6 +394,7 @@ void main() {
     expect(after.body['events'], 0);
     expect(after.body['tasks'], 1);
     expect(after.body['tags'], 0);
+    expect(after.body['routines'], 0);
   });
 
   test('replace sem dispositivo autenticado é recusado', () async {

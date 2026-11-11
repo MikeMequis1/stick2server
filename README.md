@@ -10,9 +10,10 @@ The app connection/pairing/sync flow lives in the
 
 ## Compatibility
 
-- Server **0.2.1** targets Stick2Planner **0.3.0** and keeps accepting older
+- Server **0.2.2** targets Stick2Planner **0.6.0** and keeps accepting older
   clients.
-- Sync entities are `postIt`, `note`, `history` and `tag`. Their payloads are
+- Sync entities are `postIt`, `note`, `history`, `tag` and `routine`. Their
+  payloads are
   stored opaquely; tag colors, palettes and completion rules are interpreted by
   the app, so adding app-only fields does not require a server update.
 - Post-it payloads may carry `timeMinutes` and `tagIds`; tag definitions travel

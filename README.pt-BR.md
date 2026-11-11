@@ -10,9 +10,10 @@ O fluxo de conexão/pareamento/sync do app fica no
 
 ## Compatibilidade
 
-- O servidor **0.2.1** tem como alvo o Stick2Planner **0.3.0** e continua
+- O servidor **0.2.2** tem como alvo o Stick2Planner **0.6.0** e continua
   aceitando clientes anteriores.
-- As entidades de sync são `postIt`, `note`, `history` e `tag`. Os payloads são
+- As entidades de sync são `postIt`, `note`, `history`, `tag` e `routine`. Os
+  payloads são
   armazenados de forma opaca; cores de tag, paletas e regras de conclusão são
   interpretadas pelo app, então campos novos do app não exigem atualizar o
   servidor.
